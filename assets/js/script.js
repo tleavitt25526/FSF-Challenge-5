@@ -2,6 +2,12 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
+// get elements
+const modal = document.getElementById('taskModal');
+const btn = document.getElementById('taskBtn');
+const submitBtn = document.getElementById('submitBtn');
+const span = document.getElementsByClassName('close')[0];
+
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
     let id = nextId;
@@ -36,5 +42,18 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
-    
+    btn.onclick = function() {
+        modal.style.display = 'block'
+    }
+    submitBtn.onclick = function() {
+        modal.style.display = 'none';
+    }
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
 });
