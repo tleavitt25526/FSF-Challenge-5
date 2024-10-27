@@ -19,7 +19,7 @@ download the directory
 
 ## Usage
 
-run index.html, or go to the GitHub page: 
+run index.html, or go to the GitHub page: https://tleavitt25526.github.io/FSF-Challenge-5/
 
 ## License
 
