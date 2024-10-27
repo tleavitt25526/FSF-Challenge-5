@@ -1,5 +1,5 @@
 // Retrieve tasks and nextId from localStorage
-let taskList = JSON.parse(localStorage.getItem("tasks"));
+let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // get elements
@@ -12,6 +12,11 @@ const span = document.getElementsByClassName('close')[0];
 const titleIn = document.getElementById('title');
 const dateIn = document.getElementById('date');
 const descIn = document.getElementById('desc');
+
+// sections
+const todo = document.getElementById('todo-cards');
+const inprog = document.getElementById('in-progress-cards');
+const done = document.getElementById('done-cards');
 
 // dayjs object
 const now = dayjs()
@@ -29,17 +34,32 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
-
+    const div = document.createElement('div');
+    //const 
+    return newDiv;
 }
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
-
+    taskList.forEach(task => {
+        const card = createTaskCard(task);
+        if (task.state == 0) todo.appendChild(card)
+        else if (task.state == 1) todo.appendChild(inprog)
+        else if (task.state == 2) todo.appendChild(done)
+    });
 }
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
-
+    const task = {
+        title: titleIn.value,
+        data: dateIn.value,
+        desc: dateIn.value,
+        id: generateTaskId(),
+        state: 0
+    }
+    taskList.push(task)
+    localStorage.setItem('tasks', JSON.stringify(taskList));
 }
 
 // Todo: create a function to handle deleting a task
@@ -54,18 +74,16 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
+    // render tasks
+    renderTaskList();
+
+    // events
     btn.onclick = function() {
         modal.style.display = 'block'
     }
     submitBtn.onclick = function() {
         // create task object and send to local storage
-        const task = {
-            title: titleIn.value,
-            data: dateIn.value,
-            desc: dateIn.value,
-            id: generateTaskId()
-        }
-        localStorage.setItem(task.id, JSON.stringify(task));
+        handleAddTask();
 
         // clear modal content
         titleIn.value = '';
@@ -73,6 +91,7 @@ $(document).ready(function () {
         descIn.value = '';
 
         modal.style.display = 'none';
+        location.reload();
     }
     span.onclick = function() {
         modal.style.display = 'none';
