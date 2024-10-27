@@ -19,15 +19,7 @@ download the directory
 
 ## Usage
 
-run index.html, or go to the GitHub page.
-
-## Contributing
-
-
-
-## Tests
-
-
+run index.html, or go to the GitHub page: 
 
 ## License
 
